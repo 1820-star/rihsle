@@ -970,9 +970,18 @@
     }
     section { padding: 5rem 2rem; }
     .hero { padding: 0 2rem 4rem; }
+    .hero-content { padding-bottom: 6.2rem; }
     .hero-title { font-size: clamp(3rem, 12vw, 6rem); max-width: 100%; }
     .hero-sub { display: none; }
-    .hero-scroll { bottom: 1.25rem; }
+    .hero-scroll {
+      left: 50%;
+      right: auto;
+      bottom: 0.35rem;
+      transform: translateX(-50%);
+      width: 100%;
+      align-items: center;
+    }
+    .hero-scroll span { text-align: center; }
     .hero-float-1, .hero-float-2, .hero-line { opacity: 0.4; }
     .about { grid-template-columns: 1fr; gap: 3rem; }
     .about-number { display: none; }
