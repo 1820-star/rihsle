@@ -1,1533 +1,386 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mathias Rihsle — Tischlermeister</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Syne:wght@400;500;700;800&display=swap" rel="stylesheet">
-<style>
-  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-  :root {
-    --ink: #0e0c0a;
-    --cream: #f2ede6;
-    --warm: #e8e0d4;
-    --gold: #c9a96e;
-    --gold-light: #e6c98a;
-    --bark: #3d2b1f;
-    --wood: #7a5c3e;
-    --fog: rgba(242,237,230,0.06);
-    --serif: 'Cormorant Garamond', Georgia, serif;
-    --sans: 'Syne', sans-serif;
-  }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    background: var(--ink);
-    color: var(--cream);
-    font-family: var(--serif);
-    overflow-x: hidden;
-    cursor: none;
-  }
-
-  body.theme-light {
-    --ink: #f7f2ea;
-    --cream: #1a120d;
-    --warm: #3b2f24;
-    --gold: #7b5528;
-    --gold-light: #9a6d35;
-    --bark: #e6dccf;
-    --wood: #9a7f5f;
-    --fog: rgba(34,26,20,0.04);
-  }
-
-  body.theme-light nav {
-    background: linear-gradient(to bottom, rgba(247,242,234,0.96), transparent);
-  }
-  body.theme-light nav.scrolled {
-    background: rgba(247,242,234,0.96);
-    border-bottom: 1px solid rgba(122,92,62,0.18);
-  }
-  body.theme-light .nav-toggle {
-    background: rgba(247,242,234,0.84);
-    color: #5f4d3a;
-    border-color: rgba(122,92,62,0.35);
-  }
-  body.theme-light .hero-bg {
-    background:
-      radial-gradient(ellipse at 70% 50%, rgba(201,169,110,0.24) 0%, transparent 60%),
-      radial-gradient(ellipse at 20% 80%, rgba(122,92,62,0.22) 0%, transparent 50%),
-      var(--ink);
-  }
-  body.theme-light .services-grid { background: rgba(122,92,62,0.18); }
-  body.theme-light .service-card:hover { background: rgba(201,169,110,0.2); }
-  body.theme-light .marquee-wrap {
-    border-top-color: rgba(122,92,62,0.24);
-    border-bottom-color: rgba(122,92,62,0.24);
-    background: rgba(201,169,110,0.12);
-  }
-  body.theme-light .stats,
-  body.theme-light .award-section,
-  body.theme-light footer {
-    border-color: rgba(122,92,62,0.2);
-  }
-  body.theme-light .award-section {
-    background: linear-gradient(135deg, rgba(201,169,110,0.24), rgba(247,242,234,0.42));
-  }
-  body.theme-light .nav-links a,
-  body.theme-light .hero-sub p,
-  body.theme-light .services-desc,
-  body.theme-light .service-text,
-  body.theme-light .stat-label,
-  body.theme-light .gallery-scroll-hint,
-  body.theme-light .award-text,
-  body.theme-light .contact-item-label,
-  body.theme-light .form-label,
-  body.theme-light .footer-copy,
-  body.theme-light .footer-link a,
-  body.theme-light .contact-item a,
-  body.theme-light .contact-item span {
-    color: rgba(22,16,12,0.96);
-  }
-  body.theme-light .hero-title,
-  body.theme-light .about-title,
-  body.theme-light .services-title,
-  body.theme-light .gallery-title,
-  body.theme-light .award-title,
-  body.theme-light .contact-title {
-    color: #1a120d;
-    font-weight: 400;
-  }
-  body.theme-light .about-text,
-  body.theme-light .hero-sub p,
-  body.theme-light .award-text,
-  body.theme-light .service-text,
-  body.theme-light .services-desc,
-  body.theme-light .stat-label,
-  body.theme-light .gallery-scroll-hint,
-  body.theme-light .contact-item-label,
-  body.theme-light .form-label,
-  body.theme-light .contact-item a,
-  body.theme-light .contact-item span,
-  body.theme-light .footer-copy,
-  body.theme-light .footer-link a {
-    color: rgba(22,16,12,0.9);
-    font-weight: 600;
-  }
-  body.theme-light .nav-links a {
-    opacity: 1;
-    font-weight: 700;
-  }
-  body.theme-light .gallery-item-overlay {
-    background: linear-gradient(to top, rgba(34,26,20,0.62), transparent 50%);
-  }
-  body.theme-light .about-img-frame img,
-  body.theme-light .gallery-item img {
-    filter: sepia(10%) contrast(1.02) brightness(0.98);
-  }
-  body.theme-light .about-img-frame::after {
-    background:
-      radial-gradient(110% 80% at 50% 100%, var(--ink) 0%, transparent 62%),
-      linear-gradient(to bottom, transparent 62%, rgba(247,242,234,0.82) 100%),
-      linear-gradient(to right, rgba(247,242,234,0.36) 0%, transparent 18%, transparent 82%, rgba(247,242,234,0.36) 100%);
-  }
-
-  /* Custom cursor */
-  .cursor {
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    background:
-      repeating-conic-gradient(
-        from 0deg,
-        var(--gold-light) 0deg 10deg,
-        #8d6b3b 10deg 16deg,
-        var(--gold) 16deg 30deg
-      );
-    border: 1px solid rgba(230,201,138,0.7);
-    position: fixed;
-    top: 0; left: 0;
-    pointer-events: none;
-    z-index: 9999;
-    transition: transform 0.15s ease, filter 0.25s ease;
-    filter: drop-shadow(0 0 8px rgba(201,169,110,0.5));
-  }
-  .cursor::before {
-    content: '';
-    position: absolute;
-    inset: 5px;
-    border-radius: 50%;
-    background: radial-gradient(circle at 35% 35%, #f3dfb3 0%, #b98f4f 72%);
-    box-shadow: inset 0 0 0 1px rgba(61,43,31,0.45);
-  }
-  .cursor::after {
-    content: '';
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    width: 4px;
-    height: 4px;
-    transform: translate(-50%, -50%);
-    border-radius: 50%;
-    background: rgba(38,26,16,0.8);
-  }
-  .cursor-angle {
-    width: 42px;
-    height: 42px;
-    color: var(--gold);
-    border-top: 1.5px solid currentColor;
-    border-left: 1.5px solid currentColor;
-    position: fixed;
-    top: 0; left: 0;
-    pointer-events: none;
-    z-index: 9998;
-    transition: transform 0.4s ease, width 0.3s, height 0.3s, border-color 0.3s, opacity 0.3s;
-    opacity: 0.65;
-  }
-  .cursor-angle::after {
-    content: '';
-    position: absolute;
-    right: 5px;
-    bottom: 5px;
-    width: 11px;
-    height: 11px;
-    border-right: 1px solid currentColor;
-    border-bottom: 1px solid currentColor;
-    opacity: 0.75;
-  }
-  body:hover .cursor { transform: translate(-50%, -50%); }
-
-  /* Grain overlay */
-  body::after {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
-    opacity: 0.035;
-    pointer-events: none;
-    z-index: 9990;
-  }
-
-  /* NAV */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0;
-    z-index: 100;
-    padding: 2rem 4rem;
-    display: flex; justify-content: space-between; align-items: center;
-    background: linear-gradient(to bottom, rgba(14,12,10,0.9), transparent);
-    backdrop-filter: blur(0px);
-    transition: all 0.5s;
-  }
-  nav.scrolled {
-    padding: 1.2rem 4rem;
-    background: rgba(14,12,10,0.95);
-    backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(201,169,110,0.15);
-  }
-  .nav-logo {
-    font-family: var(--sans);
-    font-weight: 800;
-    font-size: 0.85rem;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--gold);
-    text-decoration: none;
-  }
-  .nav-links {
-    display: flex; gap: 3rem; list-style: none;
-  }
-  .theme-toggle {
-    border: 1px solid rgba(201,169,110,0.35);
-    background: rgba(14,12,10,0.7);
-    color: var(--gold-light);
-    height: 40px;
-    padding: 0 0.9rem;
-    margin-left: 0.8rem;
-    font-family: var(--sans);
-    font-size: 0.62rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    cursor: pointer;
-  }
-  body.theme-light .theme-toggle {
-    background: rgba(247,242,234,0.84);
-    color: #5f4d3a;
-    border-color: rgba(122,92,62,0.35);
-  }
-  .nav-toggle {
-    display: none;
-    width: 44px;
-    height: 44px;
-    border: 1px solid rgba(201,169,110,0.35);
-    background: rgba(14,12,10,0.7);
-    color: var(--gold-light);
-    align-items: center;
-    justify-content: center;
-    gap: 4px;
-    flex-direction: column;
-    cursor: pointer;
-  }
-  .nav-toggle span {
-    width: 18px;
-    height: 1px;
-    background: currentColor;
-    transition: transform 0.25s ease, opacity 0.25s ease;
-  }
-  nav.nav-open .nav-toggle span:nth-child(1) {
-    transform: translateY(5px) rotate(45deg);
-  }
-  nav.nav-open .nav-toggle span:nth-child(2) {
-    opacity: 0;
-  }
-  nav.nav-open .nav-toggle span:nth-child(3) {
-    transform: translateY(-5px) rotate(-45deg);
-  }
-  .nav-links a {
-    font-family: var(--sans);
-    font-size: 0.7rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--warm);
-    text-decoration: none;
-    opacity: 0.7;
-    transition: opacity 0.3s, color 0.3s;
-    position: relative;
-  }
-  .nav-links a::after {
-    content: '';
-    position: absolute;
-    bottom: -4px; left: 0;
-    width: 0; height: 1px;
-    background: var(--gold);
-    transition: width 0.3s;
-  }
-  .nav-links a:hover { opacity: 1; color: var(--gold); }
-  .nav-links a:hover::after { width: 100%; }
-
-  /* HERO */
-  .hero {
-    height: 100vh; position: relative;
-    display: flex; align-items: flex-end;
-    padding: 0 4rem 5rem;
-    overflow: hidden;
-  }
-  .hero-bg {
-    position: absolute; inset: 0;
-    background: 
-      radial-gradient(ellipse at 70% 50%, rgba(122,92,62,0.2) 0%, transparent 60%),
-      radial-gradient(ellipse at 20% 80%, rgba(61,43,31,0.4) 0%, transparent 50%),
-      var(--ink);
-  }
-  .hero-line {
-    position: absolute;
-    top: 50%; left: 4rem;
-    width: 1px; height: 35vh;
-    background: linear-gradient(to bottom, transparent, var(--gold), transparent);
-    transform: translateY(-50%);
-    animation: lineFloat 3s ease-in-out infinite;
-  }
-  @keyframes lineFloat {
-    0%, 100% { opacity: 0.4; transform: translateY(-50%) scaleY(1); }
-    50% { opacity: 0.8; transform: translateY(-50%) scaleY(1.1); }
-  }
-  .hero-eyebrow {
-    font-family: var(--sans);
-    font-size: 0.65rem;
-    letter-spacing: 0.4em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 1.5rem;
-    opacity: 0;
-    animation: fadeUp 1s 0.5s forwards;
-  }
-  .hero-title {
-    font-size: clamp(4rem, 10vw, 9rem);
-    font-weight: 300;
-    line-height: 0.9;
-    letter-spacing: -0.02em;
-    max-width: 70vw;
-    opacity: 0;
-    animation: fadeUp 1.2s 0.7s forwards;
-  }
-  .hero-title em {
-    font-style: italic;
-    color: var(--gold-light);
-  }
-  .hero-sub {
-    position: absolute;
-    right: 4rem; bottom: 5rem;
-    text-align: right;
-    max-width: 300px;
-    opacity: 0;
-    animation: fadeUp 1s 1.2s forwards;
-  }
-  .hero-sub p {
-    font-size: 1rem;
-    font-style: italic;
-    line-height: 1.7;
-    color: rgba(242,237,230,0.6);
-  }
-  .hero-scroll {
-    position: absolute;
-    bottom: 3rem; left: 50%;
-    transform: translateX(-50%);
-    display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
-    opacity: 0;
-    animation: fadeUp 1s 1.5s forwards;
-  }
-  .hero-scroll span {
-    font-family: var(--sans);
-    font-size: 0.6rem;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: rgba(242,237,230,0.4);
-  }
-  .scroll-line {
-    width: 1px; height: 60px;
-    background: linear-gradient(to bottom, var(--gold), transparent);
-    animation: scrollAnim 2s ease-in-out infinite;
-  }
-  @keyframes scrollAnim {
-    0% { transform: scaleY(0); transform-origin: top; }
-    50% { transform: scaleY(1); transform-origin: top; }
-    51% { transform: scaleY(1); transform-origin: bottom; }
-    100% { transform: scaleY(0); transform-origin: bottom; }
-  }
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  /* MARQUEE */
-  .marquee-wrap {
-    overflow: hidden;
-    border-top: 1px solid rgba(201,169,110,0.2);
-    border-bottom: 1px solid rgba(201,169,110,0.2);
-    padding: 1.2rem 0;
-    background: rgba(201,169,110,0.04);
-  }
-  .marquee-track {
-    display: flex; gap: 4rem;
-    animation: marquee 25s linear infinite;
-    white-space: nowrap;
-  }
-  .marquee-item {
-    display: flex; align-items: center; gap: 2rem;
-    font-family: var(--sans);
-    font-size: 0.65rem;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: rgba(201,169,110,0.6);
-    flex-shrink: 0;
-  }
-  .marquee-item::before {
-    content: '◆';
-    color: var(--gold);
-    font-size: 0.4rem;
-  }
-  @keyframes marquee {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
-  }
-
-  /* SECTION BASE */
-  section { padding: 8rem 4rem; }
-  .section-label {
-    font-family: var(--sans);
-    font-size: 0.6rem;
-    letter-spacing: 0.5em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 3rem;
-    opacity: 0.7;
-  }
-
-  /* ABOUT */
-  .about {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 6rem;
-    align-items: center;
-  }
-  .about-left .section-label { display: block; }
-  .about-number {
-    font-size: clamp(8rem, 15vw, 14rem);
-    font-weight: 300;
-    line-height: 1;
-    color: rgba(201,169,110,0.08);
-    position: absolute;
-    top: -2rem;
-    right: 0;
-    pointer-events: none;
-    user-select: none;
-  }
-  .about-left { position: relative; }
-  .about-title {
-    font-size: clamp(2.5rem, 5vw, 4.5rem);
-    font-weight: 300;
-    line-height: 1.1;
-    margin-bottom: 2rem;
-  }
-  .about-title em { font-style: italic; color: var(--gold-light); }
-  .about-text {
-    font-size: 1.1rem;
-    line-height: 1.9;
-    color: rgba(242,237,230,0.65);
-    max-width: 460px;
-  }
-  .about-text + .about-text { margin-top: 1.5rem; }
-  .about-right {
-    position: relative;
-  }
-  .about-img-frame {
-    position: relative;
-    aspect-ratio: 3/4;
-    overflow: hidden;
-    background: var(--bark);
-    isolation: isolate;
-    box-shadow: 0 28px 60px rgba(0,0,0,0.35);
-  }
-  .about-img-frame::before {
-    content: '';
-    position: absolute;
-    inset: -1px;
-    border: 1px solid rgba(201,169,110,0.3);
-    z-index: 3;
-    pointer-events: none;
-  }
-  .about-img-frame::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: 2;
-    pointer-events: none;
-    background:
-      radial-gradient(110% 80% at 50% 100%, var(--ink) 0%, transparent 62%),
-      linear-gradient(to bottom, transparent 62%, rgba(14,12,10,0.74) 100%),
-      linear-gradient(to right, rgba(14,12,10,0.34) 0%, transparent 18%, transparent 82%, rgba(14,12,10,0.34) 100%);
-  }
-  .about-img-frame img {
-    width: 100%; height: 100%;
-    object-fit: cover;
-    filter: sepia(20%) contrast(1.05);
-    -webkit-mask-image: radial-gradient(140% 120% at 50% 42%, #000 62%, transparent 98%);
-    mask-image: radial-gradient(140% 120% at 50% 42%, #000 62%, transparent 98%);
-    transition: transform 0.8s ease;
-  }
-  .about-img-frame:hover img { transform: scale(1.03); }
-  .about-tag {
-    position: absolute;
-    bottom: -1.5rem; left: -2rem;
-    background: var(--gold);
-    color: var(--ink);
-    padding: 1rem 1.5rem;
-    font-family: var(--sans);
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-  }
-
-  /* STATS */
-  .stats {
-    border-top: 1px solid rgba(201,169,110,0.15);
-    border-bottom: 1px solid rgba(201,169,110,0.15);
-    padding: 4rem;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0;
-  }
-  .stat {
-    padding: 2rem 3rem;
-    border-right: 1px solid rgba(201,169,110,0.15);
-    text-align: center;
-  }
-  .stat:last-child { border-right: none; }
-  .stat-number {
-    font-size: clamp(3rem, 6vw, 5rem);
-    font-weight: 300;
-    line-height: 1;
-    color: var(--gold);
-    margin-bottom: 0.5rem;
-  }
-  .stat-label {
-    font-family: var(--sans);
-    font-size: 0.65rem;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: rgba(242,237,230,0.4);
-  }
-
-  /* SERVICES */
-  .services-header {
-    display: flex; justify-content: space-between; align-items: flex-end;
-    margin-bottom: 5rem;
-  }
-  .services-title {
-    font-size: clamp(2.5rem, 5vw, 4.5rem);
-    font-weight: 300;
-    line-height: 1.1;
-  }
-  .services-title em { font-style: italic; color: var(--gold-light); }
-  .services-desc {
-    max-width: 320px;
-    font-size: 1rem;
-    line-height: 1.8;
-    color: rgba(242,237,230,0.5);
-    font-style: italic;
-  }
-  .services-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1px;
-    background: rgba(201,169,110,0.1);
-  }
-  .service-card {
-    background: var(--ink);
-    padding: 3rem 2.5rem;
-    position: relative;
-    overflow: hidden;
-    transition: background 0.4s;
-  }
-  .service-card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, rgba(201,169,110,0.05), transparent);
-    opacity: 0;
-    transition: opacity 0.4s;
-  }
-  .service-card:hover { background: rgba(61,43,31,0.4); }
-  .service-card:hover::before { opacity: 1; }
-  .service-num {
-    font-size: 0.6rem;
-    font-family: var(--sans);
-    letter-spacing: 0.3em;
-    color: var(--gold);
-    margin-bottom: 2rem;
-    opacity: 0.6;
-  }
-  .service-icon {
-    width: 48px; height: 48px;
-    margin-bottom: 1.5rem;
-    color: var(--gold);
-    opacity: 0.7;
-  }
-  .service-name {
-    font-size: 1.8rem;
-    font-weight: 300;
-    margin-bottom: 1rem;
-    line-height: 1.2;
-  }
-  .service-text {
-    font-size: 0.9rem;
-    line-height: 1.8;
-    color: rgba(242,237,230,0.5);
-  }
-  .service-line {
-    position: absolute;
-    bottom: 0; left: 2.5rem;
-    width: 0; height: 1px;
-    background: var(--gold);
-    transition: width 0.6s ease;
-  }
-  .service-card:hover .service-line { width: calc(100% - 5rem); }
-
-  /* GALLERY */
-  .gallery-section { padding: 6rem 0; }
-  .gallery-header {
-    padding: 0 4rem;
-    margin-bottom: 4rem;
-    display: flex; justify-content: space-between; align-items: center;
-  }
-  .gallery-title {
-    font-size: clamp(2.5rem, 5vw, 4.5rem);
-    font-weight: 300;
-  }
-  .gallery-title em { font-style: italic; color: var(--gold-light); }
-  .gallery-scroll-hint {
-    font-family: var(--sans);
-    font-size: 0.6rem;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: rgba(242,237,230,0.3);
-  }
-  .gallery-track {
-    display: flex; gap: 2rem;
-    padding: 0 4rem;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scrollbar-width: none;
-    cursor: grab;
-  }
-  .gallery-track:active { cursor: grabbing; }
-  .gallery-track::-webkit-scrollbar { display: none; }
-  .gallery-item {
-    flex-shrink: 0;
-    scroll-snap-align: start;
-    position: relative;
-    overflow: hidden;
-    background: var(--bark);
-  }
-  .gallery-item:nth-child(odd) { width: 380px; height: 480px; }
-  .gallery-item:nth-child(even) { width: 300px; height: 380px; align-self: center; }
-  .gallery-item img {
-    width: 100%; height: 100%;
-    object-fit: cover;
-    filter: sepia(15%) contrast(1.05) brightness(0.9);
-    transition: transform 0.7s ease, filter 0.5s;
-  }
-  .gallery-item:hover img {
-    transform: scale(1.05);
-    filter: sepia(5%) contrast(1.1) brightness(1);
-  }
-  .gallery-item-overlay {
-    position: absolute; inset: 0;
-    background: linear-gradient(to top, rgba(14,12,10,0.7), transparent 50%);
-    opacity: 0;
-    transition: opacity 0.4s;
-    display: flex; align-items: flex-end; padding: 2rem;
-  }
-  .gallery-item:hover .gallery-item-overlay { opacity: 1; }
-  .gallery-caption {
-    font-size: 0.9rem;
-    font-style: italic;
-    color: var(--cream);
-  }
-
-  /* AWARDS */
-  .award-section {
-    background: linear-gradient(135deg, rgba(61,43,31,0.4), rgba(122,92,62,0.1));
-    border-top: 1px solid rgba(201,169,110,0.15);
-    border-bottom: 1px solid rgba(201,169,110,0.15);
-  }
-  .award-inner {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 6rem;
-    align-items: center;
-  }
-  .award-badge {
-    width: 140px; height: 140px;
-    border: 1px solid rgba(201,169,110,0.4);
-    border-radius: 50%;
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    margin-bottom: 3rem;
-    position: relative;
-    animation: badgeSpin 20s linear infinite;
-  }
-  @keyframes badgeSpin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-  }
-  .award-badge::after {
-    content: 'LIGNORAM · AWARD · 2024 · LIGNORAM · AWARD · 2024 · ';
-    position: absolute;
-    font-family: var(--sans);
-    font-size: 0.42rem;
-    letter-spacing: 0.18em;
-    color: var(--gold);
-    width: 100%; height: 100%;
-    display: flex; align-items: center; justify-content: center;
-    text-align: center;
-    animation: badgeSpin 20s linear infinite reverse;
-  }
-  .award-inner-icon {
-    font-size: 2.5rem;
-    animation: badgeSpin 20s linear infinite reverse;
-  }
-  .award-title {
-    font-size: clamp(2rem, 4vw, 3.5rem);
-    font-weight: 300;
-    line-height: 1.2;
-    margin-bottom: 1.5rem;
-  }
-  .award-title em { font-style: italic; color: var(--gold-light); }
-  .award-text {
-    font-size: 1rem;
-    line-height: 1.9;
-    color: rgba(242,237,230,0.6);
-    max-width: 480px;
-  }
-  .sinplea-label {
-    display: inline-block;
-    margin-top: 2rem;
-    font-family: var(--sans);
-    font-size: 0.65rem;
-    letter-spacing: 0.4em;
-    text-transform: uppercase;
-    color: var(--gold);
-    border: 1px solid rgba(201,169,110,0.3);
-    padding: 0.6rem 1.5rem;
-  }
-
-  /* CONTACT */
-  .contact-section { padding: 8rem 4rem; }
-  .contact-inner {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8rem;
-    align-items: start;
-  }
-  .contact-title {
-    font-size: clamp(3rem, 6vw, 5.5rem);
-    font-weight: 300;
-    line-height: 0.95;
-    margin-bottom: 3rem;
-  }
-  .contact-title em { font-style: italic; color: var(--gold-light); display: block; }
-  .contact-info { display: flex; flex-direction: column; gap: 2rem; }
-  .contact-item {
-    display: flex; flex-direction: column; gap: 0.3rem;
-    padding-bottom: 2rem;
-    border-bottom: 1px solid rgba(201,169,110,0.1);
-  }
-  .contact-item-label {
-    font-family: var(--sans);
-    font-size: 0.55rem;
-    letter-spacing: 0.4em;
-    text-transform: uppercase;
-    color: var(--gold);
-    opacity: 0.7;
-  }
-  .contact-item a, .contact-item span {
-    font-size: 1.3rem;
-    color: var(--cream);
-    text-decoration: none;
-    transition: color 0.3s;
-  }
-  .contact-item a:hover { color: var(--gold); }
-  .contact-form { display: flex; flex-direction: column; gap: 1.5rem; }
-  .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
-  .form-label {
-    font-family: var(--sans);
-    font-size: 0.55rem;
-    letter-spacing: 0.4em;
-    text-transform: uppercase;
-    color: rgba(242,237,230,0.4);
-  }
-  .form-input, .form-textarea {
-    background: transparent;
-    border: none;
-    border-bottom: 1px solid rgba(201,169,110,0.2);
-    color: var(--cream);
-    font-family: var(--serif);
-    font-size: 1rem;
-    padding: 0.8rem 0;
-    outline: none;
-    transition: border-color 0.3s;
-    width: 100%;
-  }
-  .form-input:focus, .form-textarea:focus { border-color: var(--gold); }
-  .form-textarea { resize: vertical; min-height: 120px; }
-  .form-submit {
-    background: var(--gold);
-    color: var(--ink);
-    border: none;
-    padding: 1.1rem 3rem;
-    font-family: var(--sans);
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    cursor: pointer;
-    align-self: flex-start;
-    transition: background 0.3s, transform 0.2s;
-  }
-  .form-submit:hover { background: var(--gold-light); transform: translateY(-2px); }
-
-  /* FOOTER */
-  footer {
-    padding: 3rem 4rem;
-    border-top: 1px solid rgba(201,169,110,0.1);
-    display: flex; justify-content: space-between; align-items: center;
-  }
-  .footer-logo {
-    font-family: var(--sans);
-    font-weight: 800;
-    font-size: 0.8rem;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--gold);
-  }
-  .footer-copy {
-    font-size: 0.8rem;
-    color: rgba(242,237,230,0.25);
-    font-style: italic;
-  }
-  .footer-link a {
-    font-family: var(--sans);
-    font-size: 0.6rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: rgba(242,237,230,0.3);
-    text-decoration: none;
-    transition: color 0.3s;
-  }
-  .footer-link a:hover { color: var(--gold); }
-
-  /* REVEAL ANIMATIONS */
-  .reveal {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 0.9s cubic-bezier(.16,1,.3,1), transform 0.9s cubic-bezier(.16,1,.3,1);
-  }
-  .reveal.visible {
-    opacity: 1;
-    transform: none;
-  }
-  .reveal-delay-1 { transition-delay: 0.1s; }
-  .reveal-delay-2 { transition-delay: 0.2s; }
-  .reveal-delay-3 { transition-delay: 0.35s; }
-
-  /* PARALLAX HERO TEXT */
-  .hero-content { position: relative; z-index: 2; }
-
-  /* WOOD DIVIDER */
-  .wood-divider {
-    height: 1px;
-    background: linear-gradient(to right, transparent, var(--gold), transparent);
-    opacity: 0.2;
-    margin: 0 4rem;
-  }
-
-  /* FLOATING ELEMENTS */
-  .hero-float-1 {
-    position: absolute;
-    top: 20%; right: 15%;
-    width: 1px; height: 120px;
-    background: linear-gradient(to bottom, transparent, rgba(201,169,110,0.4), transparent);
-    animation: floatVert 4s ease-in-out infinite;
-  }
-  .hero-float-2 {
-    position: absolute;
-    top: 65%; right: 30%;
-    width: 60px; height: 1px;
-    background: linear-gradient(to right, transparent, rgba(201,169,110,0.3), transparent);
-    animation: floatVert 5s ease-in-out infinite 1s;
-  }
-  @keyframes floatVert {
-    0%, 100% { opacity: 0.3; transform: translateY(0); }
-    50% { opacity: 0.7; transform: translateY(-10px); }
-  }
-
-  /* Number counter animation */
-  .count-up { display: inline-block; }
-
-  @media (hover: none), (pointer: coarse) {
-    body { cursor: auto; }
-    .cursor, .cursor-angle { display: none; }
-  }
-
-  @media (max-width: 900px) {
-    nav { padding: 1.5rem 2rem; }
-    nav.scrolled { padding: 1rem 2rem; }
-    body.nav-open { overflow: hidden; }
-    .nav-toggle { display: inline-flex; }
-    .theme-toggle {
-      height: 44px;
-      padding: 0 0.7rem;
-      margin-left: 0.55rem;
-      font-size: 0.58rem;
-      letter-spacing: 0.16em;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mathias Rihsle - Tischlermeister</title>
+  <meta name="description" content="Mathias Rihsle fertigt exklusive Maßmöbel und Inneneinrichtungen in Leibnitz und der Steiermark.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Syne:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['Syne', 'sans-serif'],
+            serif: ['Cormorant Garamond', 'serif']
+          },
+          colors: {
+            ink: '#0f0b08',
+            cream: '#efe7dc',
+            brass: '#c59a5c',
+            bark: '#2e1f15',
+            moss: '#19352c'
+          },
+          boxShadow: {
+            soft: '0 20px 50px rgba(0, 0, 0, 0.35)'
+          },
+          keyframes: {
+            floatIn: {
+              '0%': { opacity: '0', transform: 'translateY(24px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' }
+            },
+            marquee: {
+              '0%': { transform: 'translateX(0%)' },
+              '100%': { transform: 'translateX(-50%)' }
+            }
+          },
+          animation: {
+            floatIn: 'floatIn .9s cubic-bezier(.16,1,.3,1) forwards',
+            marquee: 'marquee 26s linear infinite'
+          }
+        }
+      }
     }
-    .nav-links {
+  </script>
+  <style>
+    body {
+      background:
+        radial-gradient(1100px 520px at 100% -5%, rgba(197,154,92,0.20), transparent 60%),
+        radial-gradient(900px 500px at -5% 20%, rgba(25,53,44,0.22), transparent 62%),
+        #0f0b08;
+    }
+
+    .grain::before {
+      content: '';
       position: fixed;
-      top: 72px;
-      left: 1rem;
-      right: 1rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-      padding: 0.8rem;
-      border: 1px solid rgba(201,169,110,0.25);
-      background: rgba(14,12,10,0.97);
-      backdrop-filter: blur(12px);
-      opacity: 0;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 220 220' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.85'/%3E%3C/svg%3E");
+      opacity: .05;
       pointer-events: none;
-      transform: translateY(-10px);
-      transition: opacity 0.25s ease, transform 0.25s ease;
+      z-index: 1;
     }
-    nav.nav-open .nav-links {
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity .75s cubic-bezier(.16,1,.3,1), transform .75s cubic-bezier(.16,1,.3,1);
+    }
+
+    .reveal.show {
       opacity: 1;
-      pointer-events: auto;
       transform: translateY(0);
     }
-    body.theme-light .nav-links {
-      background: rgba(247,242,234,0.98);
-      border-color: rgba(122,92,62,0.25);
-    }
-    .nav-links li { border-bottom: 1px solid rgba(201,169,110,0.12); }
-    .nav-links li:last-child { border-bottom: none; }
-    .nav-links a {
-      display: block;
-      padding: 0.9rem 0.6rem;
-      font-size: 0.8rem;
-      letter-spacing: 0.25em;
-    }
-    section { padding: 5rem 2rem; }
-    .hero { padding: 0 2rem 4rem; }
-    .hero-content { padding-bottom: 6.2rem; }
-    .hero-title { font-size: clamp(3rem, 12vw, 6rem); max-width: 100%; }
-    .hero-sub { display: none; }
-    .hero-scroll {
-      left: 50%;
-      right: auto;
-      bottom: 0.35rem;
-      transform: translateX(-50%);
-      width: max-content;
-      max-width: none;
-      align-items: center;
-      margin: 0;
-    }
-    .hero-scroll span,
-    .hero-scroll .scroll-line {
-      margin-left: auto;
-      margin-right: auto;
-      text-align: center;
-    }
-    .hero-float-1, .hero-float-2, .hero-line { opacity: 0.4; }
-    .about { grid-template-columns: 1fr; gap: 3rem; }
-    .about-number { display: none; }
-    .about-tag { left: 0.7rem; bottom: -1.2rem; }
-    .stats { grid-template-columns: 1fr; }
-    .stat { border-right: none; border-bottom: 1px solid rgba(201,169,110,0.1); }
-    .services-grid { grid-template-columns: 1fr; }
-    .services-header { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
-    .service-card { padding: 2.2rem 1.6rem; }
-    .service-line, .service-card:hover .service-line { left: 1.6rem; width: calc(100% - 3.2rem); }
-    .gallery-item:nth-child(odd), .gallery-item:nth-child(even) { width: 78vw; height: 55vh; max-height: 430px; }
-    .award-inner { grid-template-columns: 1fr; gap: 3rem; }
-    .contact-inner { grid-template-columns: 1fr; gap: 4rem; }
-    .contact-item a, .contact-item span { font-size: 1.05rem; }
-    .form-submit { width: 100%; text-align: center; }
-    footer { flex-direction: column; gap: 1rem; text-align: center; }
-    .gallery-header { padding: 0 2rem; }
-    .gallery-track { padding: 0 2rem; }
-    .wood-divider { margin: 0 2rem; }
-  }
 
-  @media (max-width: 560px) {
-    .hero-eyebrow { letter-spacing: 0.24em; }
-    .gallery-scroll-hint { display: none; }
-    .marquee-item { letter-spacing: 0.2em; }
-    .contact-title { font-size: clamp(2.4rem, 12vw, 3.6rem); }
-    .award-badge { width: 115px; height: 115px; }
-  }
-</style>
+    .gallery-snap {
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+    }
+
+    .gallery-snap::-webkit-scrollbar {
+      display: none;
+    }
+
+    .gallery-item {
+      scroll-snap-align: start;
+    }
+  </style>
 </head>
-<body>
-
-<div class="cursor" id="cursor"></div>
-<div class="cursor-angle" id="cursorAngle"></div>
-
-<!-- NAV -->
-<nav id="mainNav">
-  <a class="nav-logo" href="#">Rihsle</a>
-  <ul class="nav-links" id="mainNavLinks">
-    <li><a href="#about">Über mich</a></li>
-    <li><a href="#leistungen">Leistungen</a></li>
-    <li><a href="#arbeiten">Arbeiten</a></li>
-    <li><a href="#kontakt">Kontakt</a></li>
-  </ul>
-  <button class="nav-toggle" id="navToggle" aria-label="Menü öffnen" aria-expanded="false" aria-controls="mainNavLinks">
-    <span></span>
-    <span></span>
-    <span></span>
-  </button>
-  <button class="theme-toggle" id="themeToggle" aria-label="Nachtmodus aktivieren">Nacht</button>
-</nav>
-
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-line"></div>
-  <div class="hero-float-1"></div>
-  <div class="hero-float-2"></div>
-
-  <div class="hero-content">
-    <p class="hero-eyebrow">Tischlermeister · Leibnitz · Steiermark</p>
-    <h1 class="hero-title">
-      Holz.<br>
-      <em>Handwerk.</em><br>
-      Meisterschaft.
-    </h1>
-  </div>
-
-  <div class="hero-sub">
-    <p>Individuelle Möbelstücke und exklusive Inneneinrichtungen — gefertigt mit dem Präzisionsanspruch eines Meisters.</p>
-  </div>
-
-  <div class="hero-scroll">
-    <span>Erkunden</span>
-    <div class="scroll-line"></div>
-  </div>
-</section>
-
-<!-- MARQUEE -->
-<div class="marquee-wrap">
-  <div class="marquee-track">
-    <div class="marquee-item">Maßmöbel</div>
-    <div class="marquee-item">Inneneinrichtung</div>
-    <div class="marquee-item">Möbelmontage</div>
-    <div class="marquee-item">Bautischlerei</div>
-    <div class="marquee-item">Küchen</div>
-    <div class="marquee-item">Einbaulösungen</div>
-    <div class="marquee-item">LignoramAward 2024</div>
-    <div class="marquee-item">Tischlermeister</div>
-    <div class="marquee-item">Maßmöbel</div>
-    <div class="marquee-item">Inneneinrichtung</div>
-    <div class="marquee-item">Möbelmontage</div>
-    <div class="marquee-item">Bautischlerei</div>
-    <div class="marquee-item">Küchen</div>
-    <div class="marquee-item">Einbaulösungen</div>
-    <div class="marquee-item">LignoramAward 2024</div>
-    <div class="marquee-item">Tischlermeister</div>
-  </div>
-</div>
-
-<!-- ABOUT -->
-<section id="about">
-  <div class="about">
-    <div class="about-left">
-      <span class="section-label reveal">— Über den Meister</span>
-      <div class="about-number">MR</div>
-      <h2 class="about-title reveal reveal-delay-1">
-        Passion für<br>
-        <em>Holz seit</em><br>
-        Kindheit.
-      </h2>
-      <p class="about-text reveal reveal-delay-2">Bereits im Kindesalter zog mich der Werkstoff Holz magisch an. Was in der Werkstatt meines Vaters als erstes Drechseln begann, wuchs zu einer lebenslangen Leidenschaft — und schließlich zur Meisterschaft.</p>
-      <p class="about-text reveal reveal-delay-3">2018 Lehrbeginn, 2022 Abschluss, 2024 Tischlermeister. Am 01. Januar 2024 gründete ich meine eigene Tischlerei und realisiere seither einzigartige Möbelstücke und individuelle Inneneinrichtungen nach höchsten Ansprüchen.</p>
-    </div>
-    <div class="about-right reveal reveal-delay-2">
-      <div class="about-img-frame">
-        <img src="assets/images/portrait.png" data-remote="https://tischler-rihsle.at/wp-content/uploads/2024/06/Bild_2024-06-05_174823275.png" alt="Mathias Rihsle, Tischlermeister" loading="lazy">
+<body class="grain text-cream font-serif antialiased selection:bg-brass selection:text-ink">
+  <div class="relative z-10 min-h-screen">
+    <header id="mainNav" class="fixed inset-x-0 top-0 z-50 border-b border-transparent bg-ink/60 px-4 py-3 backdrop-blur transition-all sm:px-6 lg:px-10">
+      <div class="mx-auto flex max-w-7xl items-center justify-between">
+        <a href="#" class="font-display text-xs font-extrabold uppercase tracking-[0.35em] text-brass">Rihsle</a>
+        <button id="navToggle" aria-expanded="false" aria-controls="mainNavLinks" aria-label="Menü öffnen" class="inline-flex h-11 w-11 items-center justify-center border border-brass/40 text-brass md:hidden">
+          <span class="sr-only">Navigation umschalten</span>
+          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"/>
+          </svg>
+        </button>
+        <nav id="mainNavLinks" class="absolute left-4 right-4 top-[calc(100%+0.75rem)] hidden border border-brass/25 bg-ink/95 p-2 md:static md:block md:border-0 md:bg-transparent md:p-0">
+          <ul class="flex flex-col gap-1 md:flex-row md:items-center md:gap-8">
+            <li><a class="block px-3 py-2 font-display text-xs uppercase tracking-[0.22em] text-cream/90 transition hover:text-brass" href="#about">Über mich</a></li>
+            <li><a class="block px-3 py-2 font-display text-xs uppercase tracking-[0.22em] text-cream/90 transition hover:text-brass" href="#leistungen">Leistungen</a></li>
+            <li><a class="block px-3 py-2 font-display text-xs uppercase tracking-[0.22em] text-cream/90 transition hover:text-brass" href="#arbeiten">Arbeiten</a></li>
+            <li><a class="block px-3 py-2 font-display text-xs uppercase tracking-[0.22em] text-cream/90 transition hover:text-brass" href="#kontakt">Kontakt</a></li>
+          </ul>
+        </nav>
       </div>
-      <div class="about-tag">Meister 2024</div>
-    </div>
-  </div>
-</section>
+    </header>
 
-<!-- STATS -->
-<div class="stats">
-  <div class="stat reveal">
-    <div class="stat-number"><span class="count-up" data-target="6">0</span>+</div>
-    <div class="stat-label">Jahre Erfahrung</div>
-  </div>
-  <div class="stat reveal reveal-delay-1">
-    <div class="stat-number">#<span class="count-up" data-target="1">0</span></div>
-    <div class="stat-label">LignoramAward Finalist</div>
-  </div>
-  <div class="stat reveal reveal-delay-2">
-    <div class="stat-number"><span class="count-up" data-target="100">0</span>%</div>
-    <div class="stat-label">Maßarbeit</div>
-  </div>
-</div>
-
-<div class="wood-divider"></div>
-
-<!-- SERVICES -->
-<section id="leistungen">
-  <div class="services-header">
-    <div>
-      <div class="section-label reveal">— Leistungen</div>
-      <h2 class="services-title reveal reveal-delay-1">Was ich<br><em>erschaffe.</em></h2>
-    </div>
-    <p class="services-desc reveal reveal-delay-2">Jedes Projekt ist einzigartig — vom ersten Gespräch bis zur finalen Montage begleite ich Sie persönlich.</p>
-  </div>
-
-  <div class="services-grid">
-    <div class="service-card reveal">
-      <div class="service-num">01</div>
-      <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2">
-        <rect x="6" y="12" width="36" height="28" rx="1"/>
-        <path d="M6 20h36"/>
-        <path d="M18 20v20"/>
-        <path d="M14 8l4 4M34 8l-4 4"/>
-      </svg>
-      <h3 class="service-name">Maß&shy;möbel</h3>
-      <p class="service-text">Individuelle Möbelstücke, die exakt auf Ihre Bedürfnisse und Räume zugeschnitten sind — vom Entwurf bis zur Fertigstellung.</p>
-      <div class="service-line"></div>
-    </div>
-    <div class="service-card reveal reveal-delay-1">
-      <div class="service-num">02</div>
-      <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2">
-        <path d="M8 40V16l16-8 16 8v24"/>
-        <path d="M20 40v-10h8v10"/>
-        <path d="M8 24h32"/>
-      </svg>
-      <h3 class="service-name">Innen&shy;einrichtung</h3>
-      <p class="service-text">Ganzheitliche Raumgestaltung mit Liebe zum Detail — harmonische Konzepte, die Wohnräume in Kunstwerke verwandeln.</p>
-      <div class="service-line"></div>
-    </div>
-    <div class="service-card reveal reveal-delay-2">
-      <div class="service-num">03</div>
-      <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2">
-        <rect x="4" y="18" width="40" height="22" rx="1"/>
-        <path d="M4 28h40"/>
-        <path d="M12 18V14a4 4 0 0 1 8 0v4M28 18V14a4 4 0 0 1 8 0v4"/>
-        <path d="M16 33v4M32 33v4"/>
-      </svg>
-      <h3 class="service-name">Küchen</h3>
-      <p class="service-text">Maßgefertigte Küchen mit präziser Planung, hochwertigen Materialien und handwerklicher Exzellenz — gebaut für Generationen.</p>
-      <div class="service-line"></div>
-    </div>
-    <div class="service-card reveal">
-      <div class="service-num">04</div>
-      <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2">
-        <path d="M6 12h36v4H6z"/>
-        <path d="M10 16v24M38 16v24"/>
-        <path d="M6 36h36"/>
-        <path d="M18 16v20M30 16v20"/>
-      </svg>
-      <h3 class="service-name">Einbau&shy;lösungen</h3>
-      <p class="service-text">Schränke, Regale und Einbaulösungen, die jeden Zentimeter Ihres Raumes optimal nutzen — funktional und ästhetisch zugleich.</p>
-      <div class="service-line"></div>
-    </div>
-    <div class="service-card reveal reveal-delay-1">
-      <div class="service-num">05</div>
-      <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2">
-        <path d="M12 8l4-4 8 8 4-4 8 8-4 4-8-8-4 4-8-8z"/>
-        <path d="M6 42l14-14"/>
-        <circle cx="10" cy="38" r="3"/>
-      </svg>
-      <h3 class="service-name">Bau&shy;tischlerei</h3>
-      <p class="service-text">Fenster, Türen, Treppen — handwerkliche Präzision trifft zeitgemäßes Design für nachhaltige bauliche Lösungen.</p>
-      <div class="service-line"></div>
-    </div>
-    <div class="service-card reveal reveal-delay-2">
-      <div class="service-num">06</div>
-      <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2">
-        <path d="M24 6l4 8 8 1-6 6 1 9-7-4-7 4 1-9-6-6 8-1z"/>
-        <path d="M24 32v10M16 38h16"/>
-      </svg>
-      <h3 class="service-name">Möbel&shy;montage</h3>
-      <p class="service-text">Professionelle Montage und fachgerechte Installation — auch für fremde Fabrikate. Koordination mit anderen Gewerken inklusive.</p>
-      <div class="service-line"></div>
-    </div>
-  </div>
-</section>
-
-<!-- GALLERY -->
-<section class="gallery-section" id="arbeiten">
-  <div class="gallery-header">
-    <div>
-      <div class="section-label reveal">— Meine Arbeiten</div>
-      <h2 class="gallery-title reveal reveal-delay-1">Ausgewählte<br><em>Werke.</em></h2>
-    </div>
-    <span class="gallery-scroll-hint">← Scrollen →</span>
-  </div>
-  <div class="gallery-track" id="galleryTrack">
-    <div class="gallery-item">
-      <img src="assets/images/work-01.jpg" data-remote="https://tischler-rihsle.at/wp-content/uploads/2024/06/IMG_5121-scaled.jpg" alt="Tischlerarbeit 1" loading="lazy">
-      <div class="gallery-item-overlay"><span class="gallery-caption">Maßanfertigung</span></div>
-    </div>
-    <div class="gallery-item">
-      <img src="assets/images/work-02.jpg" data-remote="https://tischler-rihsle.at/wp-content/uploads/2024/06/IMG_5100-scaled.jpg" alt="Tischlerarbeit 2" loading="lazy">
-      <div class="gallery-item-overlay"><span class="gallery-caption">Detailarbeit</span></div>
-    </div>
-    <div class="gallery-item">
-      <img src="assets/images/work-03.jpg" data-remote="https://tischler-rihsle.at/wp-content/uploads/2024/06/IMG_5091-scaled.jpg" alt="Tischlerarbeit 3" loading="lazy">
-      <div class="gallery-item-overlay"><span class="gallery-caption">Innenausbau</span></div>
-    </div>
-    <div class="gallery-item">
-      <img src="assets/images/work-04.jpg" data-remote="https://tischler-rihsle.at/wp-content/uploads/2024/06/IMG_3462-scaled.jpg" alt="Tischlerarbeit 4" loading="lazy">
-      <div class="gallery-item-overlay"><span class="gallery-caption">Einbaulösung</span></div>
-    </div>
-    <div class="gallery-item">
-      <img src="assets/images/work-05.jpg" data-remote="https://tischler-rihsle.at/wp-content/uploads/2024/06/IMG_3455-scaled.jpg" alt="Tischlerarbeit 5" loading="lazy">
-      <div class="gallery-item-overlay"><span class="gallery-caption">Holzwerk</span></div>
-    </div>
-    <div class="gallery-item">
-      <img src="assets/images/work-06.jpg" data-remote="https://tischler-rihsle.at/wp-content/uploads/2024/06/IMG_2754-scaled.jpg" alt="Tischlerarbeit 6" loading="lazy">
-      <div class="gallery-item-overlay"><span class="gallery-caption">Küchenmöbel</span></div>
-    </div>
-    <div class="gallery-item">
-      <img src="assets/images/work-07.jpg" data-remote="https://tischler-rihsle.at/wp-content/uploads/2024/06/IMG_1929-scaled.jpg" alt="Tischlerarbeit 7" loading="lazy">
-      <div class="gallery-item-overlay"><span class="gallery-caption">Schlafzimmer</span></div>
-    </div>
-    <div class="gallery-item">
-      <img src="assets/images/work-08.jpg" data-remote="https://tischler-rihsle.at/wp-content/uploads/2024/06/IMG_1928-scaled.jpg" alt="Tischlerarbeit 8" loading="lazy">
-      <div class="gallery-item-overlay"><span class="gallery-caption">Regal</span></div>
-    </div>
-  </div>
-</section>
-
-<!-- AWARD -->
-<section class="award-section" id="sinplea">
-  <div class="award-inner">
-    <div class="reveal">
-      <div class="award-badge">
-        <div class="award-inner-icon">🏆</div>
-      </div>
-      <h2 class="award-title">
-        Finalist<br>
-        <em>LignoramAward</em><br>
-        2024
-      </h2>
-      <div class="sinplea-label">Meisterstück „Sinplea"</div>
-    </div>
-    <div class="reveal reveal-delay-2">
-      <div class="section-label">— Auszeichnung</div>
-      <p class="award-text" style="margin-top:1rem;">Mathias Rihsles Bar-Möbel <strong style="color:var(--gold-light);">„Sinplea"</strong> beeindruckte Jury und Publikum beim bundesweiten Wettbewerb in Riedau. Äußerlich schlicht wie ein einfaches High-Board — mit grauem Linoleum und Eichendetails — verbirgt es im Inneren alle Funktionen einer vollständig ausgestatteten Bar.</p>
-      <p class="award-text" style="margin-top:1.5rem;">Grauspiegel, Steinplatte zum Anrichten, Glasfächer und versteckter Stauraum — was von außen puristisch wirkt, offenbart sich beim Öffnen der Koffertüren als durchdachtes Meisterwerk handwerklicher Kreativität.</p>
-      <p class="award-text" style="margin-top:1.5rem; font-style:italic; opacity:0.5;">Ausgestellt im Holz- und Werkzeugmuseum LIGNORAMA, Riedau</p>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section class="contact-section" id="kontakt">
-  <div class="contact-inner">
-    <div>
-      <div class="section-label reveal">— Kontakt</div>
-      <h2 class="contact-title reveal reveal-delay-1">
-        Ihr Projekt<br>
-        <em>beginnt hier.</em>
-      </h2>
-      <div class="contact-info">
-        <div class="contact-item reveal reveal-delay-2">
-          <span class="contact-item-label">Telefon</span>
-          <a href="tel:+436644906080">+43 664 490 60 80</a>
+    <main>
+      <section class="relative overflow-hidden px-4 pb-16 pt-32 sm:px-6 md:pb-24 md:pt-40 lg:px-10">
+        <div class="mx-auto grid max-w-7xl gap-10 md:grid-cols-[1.1fr_.9fr] md:items-end">
+          <div class="reveal">
+            <p class="font-display text-[11px] uppercase tracking-[0.35em] text-brass/90">Tischlermeister · Leibnitz · Steiermark</p>
+            <h1 class="mt-5 text-[15vw] leading-[0.86] text-cream sm:text-7xl lg:text-8xl xl:text-9xl">
+              Holz.<br>
+              <em class="text-brass not-italic">Handwerk.</em><br>
+              Meisterschaft.
+            </h1>
+            <p class="mt-6 max-w-xl text-lg leading-relaxed text-cream/80 sm:text-xl">Individuelle Möbelstücke und exklusive Inneneinrichtungen, gefertigt mit Präzision, Haltung und einem klaren Anspruch an Qualität.</p>
+            <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+              <a href="#kontakt" class="inline-flex items-center justify-center border border-brass bg-brass px-6 py-3 font-display text-xs font-bold uppercase tracking-[0.22em] text-ink transition hover:bg-transparent hover:text-brass">Projekt starten</a>
+              <a href="#arbeiten" class="inline-flex items-center justify-center border border-brass/40 px-6 py-3 font-display text-xs font-bold uppercase tracking-[0.22em] text-cream transition hover:border-brass hover:text-brass">Arbeiten ansehen</a>
+            </div>
+          </div>
+          <div class="reveal">
+            <div class="rounded-sm border border-brass/20 bg-gradient-to-b from-bark/40 to-ink/60 p-5 shadow-soft sm:p-7">
+              <p class="font-display text-[11px] uppercase tracking-[0.3em] text-brass">Meister 2024</p>
+              <p class="mt-4 text-2xl leading-tight text-cream sm:text-3xl">Von der Werkstatt des Vaters bis zur eigenen Tischlerei: ein Weg mit Fokus auf Maßarbeit.</p>
+              <p class="mt-4 text-base leading-relaxed text-cream/75">Lehrbeginn 2018, Abschluss 2022, Meistertitel 2024. Seit Januar 2024 entstehen hier charakterstarke Einzelstücke für Wohnräume mit Seele.</p>
+            </div>
+          </div>
         </div>
-        <div class="contact-item reveal reveal-delay-2">
-          <span class="contact-item-label">E-Mail</span>
-          <a href="mailto:office@tischler-rihsle.at">office@tischler-rihsle.at</a>
+      </section>
+
+      <section class="border-y border-brass/25 bg-brass/10 py-4">
+        <div class="overflow-hidden">
+          <div class="flex min-w-max items-center gap-8 whitespace-nowrap font-display text-[11px] uppercase tracking-[0.3em] text-brass/90 animate-marquee">
+            <span>Massmöbel</span><span>◆</span><span>Inneneinrichtung</span><span>◆</span><span>Küchen</span><span>◆</span><span>Einbaulösungen</span><span>◆</span><span>Bautischlerei</span><span>◆</span><span>Möbelmontage</span><span>◆</span><span>LignoramAward 2024</span>
+            <span>◆</span><span>Massmöbel</span><span>◆</span><span>Inneneinrichtung</span><span>◆</span><span>Küchen</span><span>◆</span><span>Einbaulösungen</span><span>◆</span><span>Bautischlerei</span><span>◆</span><span>Möbelmontage</span><span>◆</span><span>LignoramAward 2024</span>
+          </div>
         </div>
-        <div class="contact-item reveal reveal-delay-3">
-          <span class="contact-item-label">Standort</span>
-          <span>Leibnitz, Steiermark, Österreich</span>
+      </section>
+
+      <section id="about" class="px-4 py-16 sm:px-6 md:py-24 lg:px-10">
+        <div class="mx-auto grid max-w-7xl gap-10 lg:grid-cols-2 lg:items-center">
+          <div class="reveal">
+            <p class="font-display text-[11px] uppercase tracking-[0.35em] text-brass">Über den Meister</p>
+            <h2 class="mt-4 text-5xl leading-[0.95] sm:text-6xl">Passion für <em class="text-brass not-italic">Holz</em> seit Kindheit.</h2>
+            <p class="mt-6 text-xl leading-relaxed text-cream/80">Bereits als Kind zog mich Holz magisch an. Was in der Werkstatt meines Vaters begann, wurde zur beruflichen Berufung.</p>
+            <p class="mt-4 text-xl leading-relaxed text-cream/80">Heute entstehen daraus einzigartige Möbelstücke und individuelle Innenräume mit Substanz, Präzision und dauerhaftem Nutzen.</p>
+          </div>
+          <div class="reveal">
+            <figure class="relative overflow-hidden border border-brass/25 bg-bark/30 shadow-soft">
+              <img src="assets/images/portrait.png" data-remote="https://tischler-rihsle.at/wp-content/uploads/2024/06/Bild_2024-06-05_174823275.png" alt="Mathias Rihsle, Tischlermeister" loading="lazy" class="h-[520px] w-full object-cover object-center">
+              <figcaption class="absolute bottom-4 left-4 border border-brass/40 bg-ink/70 px-3 py-1 font-display text-[10px] uppercase tracking-[0.28em] text-brass">Meister 2024</figcaption>
+            </figure>
+          </div>
         </div>
-        <div class="contact-item reveal reveal-delay-3">
-          <span class="contact-item-label">AGB</span>
-          <a href="https://tischler-rihsle.at/wp-content/uploads/2024/06/tischler-Rihsle-agb.pdf" target="_blank">Allgemeine Geschäftsbedingungen ↗</a>
+      </section>
+
+      <section class="px-4 pb-8 sm:px-6 lg:px-10">
+        <div class="mx-auto grid max-w-7xl divide-y divide-brass/20 border-y border-brass/20 md:grid-cols-3 md:divide-x md:divide-y-0">
+          <article class="reveal px-5 py-8 text-center sm:px-8">
+            <p class="font-display text-5xl text-brass"><span class="count-up" data-target="6">0</span>+</p>
+            <p class="mt-2 font-display text-[11px] uppercase tracking-[0.28em] text-cream/70">Jahre Erfahrung</p>
+          </article>
+          <article class="reveal px-5 py-8 text-center sm:px-8">
+            <p class="font-display text-5xl text-brass">#<span class="count-up" data-target="1">0</span></p>
+            <p class="mt-2 font-display text-[11px] uppercase tracking-[0.28em] text-cream/70">LignoramAward Finalist</p>
+          </article>
+          <article class="reveal px-5 py-8 text-center sm:px-8">
+            <p class="font-display text-5xl text-brass"><span class="count-up" data-target="100">0</span>%</p>
+            <p class="mt-2 font-display text-[11px] uppercase tracking-[0.28em] text-cream/70">Massarbeit</p>
+          </article>
         </div>
+      </section>
+
+      <section id="leistungen" class="px-4 py-16 sm:px-6 md:py-24 lg:px-10">
+        <div class="mx-auto max-w-7xl">
+          <div class="reveal mb-10 flex flex-col gap-4 md:mb-14 md:flex-row md:items-end md:justify-between">
+            <div>
+              <p class="font-display text-[11px] uppercase tracking-[0.35em] text-brass">Leistungen</p>
+              <h2 class="mt-3 text-5xl leading-[0.95] sm:text-6xl">Was ich <em class="text-brass not-italic">erschaffe.</em></h2>
+            </div>
+            <p class="max-w-md text-lg leading-relaxed text-cream/75">Vom ersten Gespräch bis zur Montage begleite ich jedes Projekt persönlich. Klare Abläufe, saubere Umsetzung, langfristige Qualität.</p>
+          </div>
+
+          <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+            <article class="reveal border border-brass/20 bg-bark/35 p-6 transition hover:-translate-y-1 hover:border-brass/45">
+              <p class="font-display text-[11px] uppercase tracking-[0.3em] text-brass">01</p>
+              <h3 class="mt-4 text-3xl">Massmöbel</h3>
+              <p class="mt-3 text-lg leading-relaxed text-cream/75">Individuelle Möbelstücke, exakt abgestimmt auf Raum, Nutzung und Materialcharakter.</p>
+            </article>
+            <article class="reveal border border-brass/20 bg-bark/35 p-6 transition hover:-translate-y-1 hover:border-brass/45">
+              <p class="font-display text-[11px] uppercase tracking-[0.3em] text-brass">02</p>
+              <h3 class="mt-4 text-3xl">Inneneinrichtung</h3>
+              <p class="mt-3 text-lg leading-relaxed text-cream/75">Ganzheitliche Konzepte für Räume, die Funktion und Atmosphäre zusammenbringen.</p>
+            </article>
+            <article class="reveal border border-brass/20 bg-bark/35 p-6 transition hover:-translate-y-1 hover:border-brass/45">
+              <p class="font-display text-[11px] uppercase tracking-[0.3em] text-brass">03</p>
+              <h3 class="mt-4 text-3xl">Küchen</h3>
+              <p class="mt-3 text-lg leading-relaxed text-cream/75">Maßgefertigte Küchen mit präziser Planung und robusten Materialien.</p>
+            </article>
+            <article class="reveal border border-brass/20 bg-bark/35 p-6 transition hover:-translate-y-1 hover:border-brass/45">
+              <p class="font-display text-[11px] uppercase tracking-[0.3em] text-brass">04</p>
+              <h3 class="mt-4 text-3xl">Einbaulösungen</h3>
+              <p class="mt-3 text-lg leading-relaxed text-cream/75">Schränke und Regale, die jeden Zentimeter effizient und ästhetisch nutzen.</p>
+            </article>
+            <article class="reveal border border-brass/20 bg-bark/35 p-6 transition hover:-translate-y-1 hover:border-brass/45">
+              <p class="font-display text-[11px] uppercase tracking-[0.3em] text-brass">05</p>
+              <h3 class="mt-4 text-3xl">Bautischlerei</h3>
+              <p class="mt-3 text-lg leading-relaxed text-cream/75">Fenster, Türen und Treppen, sauber umgesetzt für langlebige Ergebnisse.</p>
+            </article>
+            <article class="reveal border border-brass/20 bg-bark/35 p-6 transition hover:-translate-y-1 hover:border-brass/45">
+              <p class="font-display text-[11px] uppercase tracking-[0.3em] text-brass">06</p>
+              <h3 class="mt-4 text-3xl">Möbelmontage</h3>
+              <p class="mt-3 text-lg leading-relaxed text-cream/75">Fachgerechte Montage inklusive Abstimmung mit anderen Gewerken.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="arbeiten" class="px-4 py-16 sm:px-6 md:py-24 lg:px-10">
+        <div class="mx-auto max-w-7xl">
+          <div class="reveal mb-8 flex items-end justify-between">
+            <div>
+              <p class="font-display text-[11px] uppercase tracking-[0.35em] text-brass">Meine Arbeiten</p>
+              <h2 class="mt-3 text-5xl leading-[0.95] sm:text-6xl">Ausgewählte <em class="text-brass not-italic">Werke.</em></h2>
+            </div>
+            <p class="hidden font-display text-[11px] uppercase tracking-[0.3em] text-cream/60 md:block">Horizontal scrollen</p>
+          </div>
+
+          <div id="galleryTrack" class="gallery-snap flex gap-4 overflow-x-auto pb-2 md:gap-6">
+            <figure class="gallery-item relative w-[80vw] shrink-0 overflow-hidden border border-brass/20 bg-bark/30 sm:w-[420px]">
+              <img src="assets/images/work-01.jpg" data-remote="https://tischler-rihsle.at/wp-content/uploads/2024/06/IMG_5121-scaled.jpg" alt="Massanfertigung" loading="lazy" class="h-[450px] w-full object-cover">
+            </figure>
+            <figure class="gallery-item relative w-[74vw] shrink-0 overflow-hidden border border-brass/20 bg-bark/30 sm:w-[360px]">
+              <img src="assets/images/work-02.jpg" data-remote="https://tischler-rihsle.at/wp-content/uploads/2024/06/IMG_5100-scaled.jpg" alt="Detailarbeit" loading="lazy" class="h-[400px] w-full object-cover">
+            </figure>
+            <figure class="gallery-item relative w-[80vw] shrink-0 overflow-hidden border border-brass/20 bg-bark/30 sm:w-[420px]">
+              <img src="assets/images/work-03.jpg" data-remote="https://tischler-rihsle.at/wp-content/uploads/2024/06/IMG_5091-scaled.jpg" alt="Innenausbau" loading="lazy" class="h-[450px] w-full object-cover">
+            </figure>
+            <figure class="gallery-item relative w-[74vw] shrink-0 overflow-hidden border border-brass/20 bg-bark/30 sm:w-[360px]">
+              <img src="assets/images/work-04.jpg" data-remote="https://tischler-rihsle.at/wp-content/uploads/2024/06/IMG_3462-scaled.jpg" alt="Einbaulösung" loading="lazy" class="h-[400px] w-full object-cover">
+            </figure>
+            <figure class="gallery-item relative w-[80vw] shrink-0 overflow-hidden border border-brass/20 bg-bark/30 sm:w-[420px]">
+              <img src="assets/images/work-05.jpg" data-remote="https://tischler-rihsle.at/wp-content/uploads/2024/06/IMG_3455-scaled.jpg" alt="Holzwerk" loading="lazy" class="h-[450px] w-full object-cover">
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="border-y border-brass/25 bg-gradient-to-br from-bark/70 to-ink px-4 py-16 sm:px-6 md:py-24 lg:px-10">
+        <div class="mx-auto grid max-w-7xl gap-10 lg:grid-cols-2 lg:items-center">
+          <div class="reveal">
+            <p class="font-display text-[11px] uppercase tracking-[0.35em] text-brass">Auszeichnung</p>
+            <h2 class="mt-3 text-5xl leading-[0.95] sm:text-6xl">Finalist <em class="text-brass not-italic">LignoramAward</em> 2024</h2>
+            <p class="mt-6 text-lg leading-relaxed text-cream/80">Das Bar-Möbel "Sinplea" überzeugte Jury und Publikum mit einer klaren Formensprache und überraschender Funktionalität im Innenleben.</p>
+            <p class="mt-4 text-lg leading-relaxed text-cream/80">Von außen reduziert, im Inneren vollständig ausgestattet: Grauspiegel, Steinplatte, Glasfächer und durchdachter Stauraum in einem kompakten Möbelstück.</p>
+          </div>
+          <div class="reveal border border-brass/30 bg-ink/45 p-8 text-center">
+            <p class="font-display text-[11px] uppercase tracking-[0.35em] text-brass">Meisterstück</p>
+            <p class="mt-3 text-4xl">"Sinplea"</p>
+            <p class="mt-6 text-base leading-relaxed text-cream/75">Ausgestellt im Holz- und Werkzeugmuseum LIGNORAMA, Riedau.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="kontakt" class="px-4 py-16 sm:px-6 md:py-24 lg:px-10">
+        <div class="mx-auto grid max-w-7xl gap-10 lg:grid-cols-2">
+          <div class="reveal">
+            <p class="font-display text-[11px] uppercase tracking-[0.35em] text-brass">Kontakt</p>
+            <h2 class="mt-3 text-5xl leading-[0.95] sm:text-6xl">Ihr Projekt beginnt <em class="text-brass not-italic">hier.</em></h2>
+            <div class="mt-8 space-y-5 text-xl">
+              <p><span class="font-display text-[10px] uppercase tracking-[0.3em] text-brass">Telefon</span><br><a href="tel:+436644906080" class="text-cream/90 transition hover:text-brass">+43 664 490 60 80</a></p>
+              <p><span class="font-display text-[10px] uppercase tracking-[0.3em] text-brass">E-Mail</span><br><a href="mailto:office@tischler-rihsle.at" class="text-cream/90 transition hover:text-brass">office@tischler-rihsle.at</a></p>
+              <p><span class="font-display text-[10px] uppercase tracking-[0.3em] text-brass">Standort</span><br><span class="text-cream/90">Leibnitz, Steiermark, Österreich</span></p>
+            </div>
+          </div>
+          <form class="reveal space-y-4 border border-brass/20 bg-bark/30 p-5 sm:p-7" onsubmit="event.preventDefault(); const btn=this.querySelector('button'); btn.textContent='Gesendet'; btn.classList.add('bg-moss'); setTimeout(()=>{btn.textContent='Anfrage senden'; btn.classList.remove('bg-moss');}, 2600);">
+            <div>
+              <label class="font-display text-[10px] uppercase tracking-[0.3em] text-brass" for="name">Name</label>
+              <input id="name" type="text" placeholder="Ihr vollständiger Name" class="mt-2 w-full border border-brass/30 bg-ink/50 px-4 py-3 text-lg text-cream outline-none transition placeholder:text-cream/40 focus:border-brass" required>
+            </div>
+            <div>
+              <label class="font-display text-[10px] uppercase tracking-[0.3em] text-brass" for="mail">E-Mail</label>
+              <input id="mail" type="email" placeholder="ihre@email.at" class="mt-2 w-full border border-brass/30 bg-ink/50 px-4 py-3 text-lg text-cream outline-none transition placeholder:text-cream/40 focus:border-brass" required>
+            </div>
+            <div>
+              <label class="font-display text-[10px] uppercase tracking-[0.3em] text-brass" for="phone">Telefon</label>
+              <input id="phone" type="tel" placeholder="+43 ..." class="mt-2 w-full border border-brass/30 bg-ink/50 px-4 py-3 text-lg text-cream outline-none transition placeholder:text-cream/40 focus:border-brass">
+            </div>
+            <div>
+              <label class="font-display text-[10px] uppercase tracking-[0.3em] text-brass" for="message">Ihr Anliegen</label>
+              <textarea id="message" rows="5" placeholder="Beschreiben Sie Ihr Projekt..." class="mt-2 w-full border border-brass/30 bg-ink/50 px-4 py-3 text-lg text-cream outline-none transition placeholder:text-cream/40 focus:border-brass" required></textarea>
+            </div>
+            <button type="submit" class="w-full border border-brass bg-brass px-6 py-3 font-display text-xs font-bold uppercase tracking-[0.22em] text-ink transition hover:bg-transparent hover:text-brass">Anfrage senden</button>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="border-t border-brass/20 px-4 py-7 sm:px-6 lg:px-10">
+      <div class="mx-auto flex max-w-7xl flex-col gap-3 text-center sm:flex-row sm:items-center sm:justify-between sm:text-left">
+        <p class="font-display text-[11px] uppercase tracking-[0.3em] text-brass">Mathias Rihsle · Tischlermeister</p>
+        <p class="text-sm text-cream/65">© 2026 Mathias Rihsle Tischlerhandwerk</p>
+        <a href="https://tischler-rihsle.at/wp-content/uploads/2024/06/tischler-Rihsle-agb.pdf" target="_blank" rel="noopener" class="font-display text-[11px] uppercase tracking-[0.26em] text-cream/80 transition hover:text-brass">AGB</a>
       </div>
-    </div>
-    <div class="contact-form reveal reveal-delay-2">
-      <div class="form-group">
-        <label class="form-label">Name</label>
-        <input class="form-input" type="text" placeholder="Ihr vollständiger Name">
-      </div>
-      <div class="form-group">
-        <label class="form-label">E-Mail</label>
-        <input class="form-input" type="email" placeholder="ihre@email.at">
-      </div>
-      <div class="form-group">
-        <label class="form-label">Telefon</label>
-        <input class="form-input" type="tel" placeholder="+43 ...">
-      </div>
-      <div class="form-group">
-        <label class="form-label">Ihr Anliegen</label>
-        <textarea class="form-textarea" placeholder="Beschreiben Sie Ihr Projekt..."></textarea>
-      </div>
-      <button class="form-submit">Anfrage senden</button>
-    </div>
+    </footer>
   </div>
-</section>
 
-<!-- FOOTER -->
-<footer>
-  <div class="footer-logo">Mathias Rihsle · Tischlermeister</div>
-  <div class="footer-copy">© 2024 Mathias Rihsle Tischlerhandwerk — Leibnitz, Steiermark</div>
-  <div class="footer-link">
-    <a href="https://tischler-rihsle.at/wp-content/uploads/2024/06/tischler-Rihsle-agb.pdf" target="_blank">AGB</a>
-  </div>
-</footer>
+  <script>
+    const nav = document.getElementById('mainNav');
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('mainNavLinks');
 
-<script>
-// Custom cursor
-const cursor = document.getElementById('cursor');
-const angle = document.getElementById('cursorAngle');
-let mx = 0, my = 0, rx = 0, ry = 0;
-let bladeRotation = 0;
-const supportsHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-
-if (!supportsHover) {
-  cursor.style.display = 'none';
-  angle.style.display = 'none';
-}
-
-if (supportsHover) {
-  document.addEventListener('mousemove', e => {
-    mx = e.clientX;
-    my = e.clientY;
-    bladeRotation = (bladeRotation + 8) % 360;
-    cursor.style.transform = `translate(${mx}px, ${my}px) translate(-50%, -50%) rotate(${bladeRotation}deg)`;
-  });
-}
-
-function animateAngle() {
-  if (!supportsHover) return;
-  rx += (mx - rx) * 0.12;
-  ry += (my - ry) * 0.12;
-  const centerX = window.innerWidth / 2;
-  const centerY = window.innerHeight / 2;
-  const toCenterX = centerX - rx;
-  const toCenterY = centerY - ry;
-  const angleToCenter = Math.atan2(toCenterY, toCenterX) * (180 / Math.PI);
-  angle.style.transform = `translate(${rx}px, ${ry}px) translate(-50%, -50%) rotate(${angleToCenter + 225}deg)`;
-  requestAnimationFrame(animateAngle);
-}
-animateAngle();
-
-if (supportsHover) {
-  document.querySelectorAll('a, button, .gallery-item, .service-card').forEach(el => {
-    el.addEventListener('mouseenter', () => {
-      angle.style.width = '58px';
-      angle.style.height = '58px';
-      angle.style.borderColor = 'var(--gold-light)';
-      angle.style.opacity = '1';
-      cursor.style.filter = 'drop-shadow(0 0 12px rgba(230,201,138,0.8))';
+    navToggle?.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('hidden');
+      navToggle.setAttribute('aria-expanded', String(!isOpen));
     });
-    el.addEventListener('mouseleave', () => {
-      angle.style.width = '42px';
-      angle.style.height = '42px';
-      angle.style.borderColor = 'var(--gold)';
-      angle.style.opacity = '0.65';
-      cursor.style.filter = 'drop-shadow(0 0 8px rgba(201,169,110,0.45))';
+
+    navLinks?.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        if (window.innerWidth < 768) {
+          navLinks.classList.add('hidden');
+          navToggle.setAttribute('aria-expanded', 'false');
+        }
+      });
     });
-  });
-}
 
-// Nav scroll
-const nav = document.getElementById('mainNav');
-const navToggle = document.getElementById('navToggle');
-const navLinks = document.getElementById('mainNavLinks');
-const themeToggle = document.getElementById('themeToggle');
-
-function applyTheme(mode) {
-  const isLight = mode === 'light';
-  document.body.classList.toggle('theme-light', isLight);
-  if (themeToggle) {
-    themeToggle.textContent = isLight ? 'Nacht' : 'Tag';
-    themeToggle.setAttribute('aria-label', isLight ? 'Nachtmodus aktivieren' : 'Tagmodus aktivieren');
-  }
-}
-
-const savedTheme = localStorage.getItem('themeMode');
-applyTheme(savedTheme || 'light');
-
-if (themeToggle) {
-  themeToggle.addEventListener('click', () => {
-    const nextMode = document.body.classList.contains('theme-light') ? 'dark' : 'light';
-    applyTheme(nextMode);
-    localStorage.setItem('themeMode', nextMode);
-  });
-}
-
-document.querySelectorAll('img[data-remote]').forEach(img => {
-  img.addEventListener('error', () => {
-    if (!img.dataset.remoteTried) {
-      img.dataset.remoteTried = '1';
-      img.src = img.dataset.remote;
-      return;
-    }
-    if (!img.dataset.placeholderSet) {
-      img.dataset.placeholderSet = '1';
-      img.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"%3E%3Crect width="1200" height="800" fill="%23d8ccbc"/%3E%3Ctext x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle" font-family="Georgia,serif" font-size="48" fill="%2365503d"%3EBild nicht gefunden%3C/text%3E%3C/svg%3E';
-    }
-  });
-});
-
-if (navToggle && navLinks) {
-  navToggle.addEventListener('click', () => {
-    const isOpen = nav.classList.toggle('nav-open');
-    document.body.classList.toggle('nav-open', isOpen);
-    navToggle.setAttribute('aria-expanded', String(isOpen));
-    navToggle.setAttribute('aria-label', isOpen ? 'Menü schließen' : 'Menü öffnen');
-  });
-
-  navLinks.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      nav.classList.remove('nav-open');
-      document.body.classList.remove('nav-open');
-      navToggle.setAttribute('aria-expanded', 'false');
-      navToggle.setAttribute('aria-label', 'Menü öffnen');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 30) {
+        nav.classList.add('bg-ink/90', 'border-brass/20');
+      } else {
+        nav.classList.remove('bg-ink/90', 'border-brass/20');
+      }
     });
-  });
-}
 
-window.addEventListener('scroll', () => {
-  nav.classList.toggle('scrolled', window.scrollY > 60);
-});
+    const reveals = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+        }
+      });
+    }, { threshold: 0.15 });
+    reveals.forEach(item => revealObserver.observe(item));
 
-// Reveal on scroll
-const reveals = document.querySelectorAll('.reveal');
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-    }
-  });
-}, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
-reveals.forEach(el => observer.observe(el));
+    const counters = document.querySelectorAll('.count-up');
+    const counterObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target;
+        const target = Number(el.dataset.target || 0);
+        const duration = 1600;
+        const start = performance.now();
 
-// Count up
-const counters = document.querySelectorAll('.count-up');
-const countObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      const el = entry.target;
-      const target = parseInt(el.dataset.target);
-      let start = 0;
-      const duration = 1800;
-      const step = target / (duration / 16);
-      const timer = setInterval(() => {
-        start += step;
-        if (start >= target) { el.textContent = target; clearInterval(timer); }
-        else { el.textContent = Math.floor(start); }
-      }, 16);
-      countObserver.unobserve(el);
-    }
-  });
-}, { threshold: 0.5 });
-counters.forEach(el => countObserver.observe(el));
+        const tick = (now) => {
+          const progress = Math.min((now - start) / duration, 1);
+          el.textContent = Math.floor(progress * target).toString();
+          if (progress < 1) requestAnimationFrame(tick);
+        };
 
-// Gallery drag scroll
-const track = document.getElementById('galleryTrack');
-let isDown = false, startX, scrollLeft;
-track.addEventListener('mousedown', e => {
-  isDown = true;
-  startX = e.pageX - track.offsetLeft;
-  scrollLeft = track.scrollLeft;
-  track.style.userSelect = 'none';
-});
-track.addEventListener('mouseup', () => { isDown = false; track.style.userSelect = ''; });
-track.addEventListener('mouseleave', () => { isDown = false; });
-track.addEventListener('mousemove', e => {
-  if (!isDown) return;
-  e.preventDefault();
-  const x = e.pageX - track.offsetLeft;
-  const walk = (x - startX) * 1.5;
-  track.scrollLeft = scrollLeft - walk;
-});
+        requestAnimationFrame(tick);
+        counterObserver.unobserve(el);
+      });
+    }, { threshold: 0.5 });
+    counters.forEach(counter => counterObserver.observe(counter));
 
-// Parallax hero
-if (supportsHover) {
-  window.addEventListener('scroll', () => {
-    const scrolled = window.scrollY;
-    const heroTitle = document.querySelector('.hero-title');
-    if (heroTitle) {
-      heroTitle.style.transform = `translateY(${scrolled * 0.3}px)`;
-      heroTitle.style.opacity = 1 - scrolled / 600;
-    }
-  });
-}
-
-// Form submit
-document.querySelector('.form-submit').addEventListener('click', function() {
-  this.textContent = 'Gesendet ✓';
-  this.style.background = 'var(--wood)';
-  setTimeout(() => {
-    this.textContent = 'Anfrage senden';
-    this.style.background = '';
-  }, 3000);
-});
-</script>
+    document.querySelectorAll('img[data-remote]').forEach(img => {
+      img.addEventListener('error', () => {
+        if (!img.dataset.remoteTried) {
+          img.dataset.remoteTried = '1';
+          img.src = img.dataset.remote;
+          return;
+        }
+        img.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"%3E%3Crect width="1200" height="800" fill="%23d8ccbc"/%3E%3Ctext x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle" font-family="Georgia,serif" font-size="48" fill="%2365503d"%3EBild nicht gefunden%3C/text%3E%3C/svg%3E';
+      });
+    });
+  </script>
 </body>
 </html>
